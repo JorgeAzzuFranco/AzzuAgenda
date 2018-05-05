@@ -4,74 +4,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.includeazzu.azzuagenda.Tab2_Marcador"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/txtnum"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="@string/numero_de_telefono" />
+        android:layout_above="@+id/info"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:src="@drawable/personagrande" />
 
-    <LinearLayout
-        android:id="@+id/tel"
+    <RelativeLayout
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtnum">
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_margin="8dp">
 
-        <EditText
-            android:id="@+id/editNum"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/nums"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:ems="10"
-            android:inputType="phone"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            android:digits="1234567890+*#"/>
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_marginTop="8dp">
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_alignBottom="@+id/editNum"
-            android:layout_toEndOf="@+id/editNum"
-            android:layout_toRightOf="@+id/editNum"
-            android:src="@drawable/masuno" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:text="@string/numero_de_telefono" />
 
-    <TextView
-        android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tel"
-        android:layout_marginTop="24dp"
-        android:textColor="@color/black"
-        android:text="@string/txt_nombre"/>
+            <EditText
+                android:id="@+id/editNum"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/txtnum"
+                android:ems="10"
+                android:inputType="phone"
+                android:textSize="24dp"
+                android:layout_marginLeft="4dp"
+                android:maxLength="12"
+                android:digits="1234567890+*#"/>
 
-    <EditText
-        android:id="@+id/editNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtNombre"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnGuardar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/editNombre"
-        android:layout_marginTop="24dp"
-        android:textSize="24sp"
-        android:text="@string/txt_guardar"/>
+        <LinearLayout
+            android:id="@+id/noms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_below="@+id/nums"
+            android:layout_marginTop="8dp">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnGuardar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/llamada" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_nombre"
+                android:textSize="24sp"
+                android:textColor="@color/black"/>
+
+
+            <EditText
+            android:id="@+id/editNombre"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noms"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_marginTop="8dp">
+
+            <ImageButton
+                android:id="@+id/btnllamar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/llamadamini" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="24sp"
+                android:text="@string/txt_guardar" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

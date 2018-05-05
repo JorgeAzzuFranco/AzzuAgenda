@@ -7,7 +7,7 @@
     <string name="tab_label2">Marcador</string>
     <string name="tab_label3">Favoritos</string>
     <string name="Sample_name">Sample Name</string>
-    <string name="numero_de_telefono">Numero de telefono</string>
-    <string name="txt_nombre">Nombre completo</string>
+    <string name="numero_de_telefono">Numero:</string>
+    <string name="txt_nombre">Nombre:</string>
     <string name="txt_guardar">Guardar</string>
 </resources>
