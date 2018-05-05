@@ -24,7 +24,6 @@ public class Tab1_Contactos extends Fragment {
     //Declarando objetos para mostrar los contactos
     ContactoAdapter cAdapter;
     ArrayList<Contacto> contactos;
-    ImageButton btnLlamar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,13 +46,10 @@ public class Tab1_Contactos extends Fragment {
     }
 
     private void addSampleContacts() {
+        Log.d("Anade", "Anadiendo contactos");
         contactos.add(new Contacto("Jorgito", "12312321",R.drawable.persona));
         contactos.add(new Contacto("Jorgito", "12312321", R.drawable.persona));
         contactos.add(new Contacto("Jorgito", "12312321", R.drawable.persona));
         contactos.add(new Contacto("Jorgito", "12312321", R.drawable.persona));
-    }
-
-    public void Llamar(){
-
     }
 }

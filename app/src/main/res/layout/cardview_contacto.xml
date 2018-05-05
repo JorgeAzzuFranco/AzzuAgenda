@@ -27,14 +27,15 @@
         android:layout_marginLeft="16dp"/>
 
         <ImageButton
-            android:id="@+id/imgLlamar"
+            android:id="@+id/btnfav"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="@+id/nomContacto"
-            android:src="@drawable/llamadamini"
-            android:onClick="Llamar" />
+            android:background="@color/cardview_light_background"
+            android:src="@drawable/nofav"
+            android:onClick="favorito"/>
 
     </RelativeLayout>
 

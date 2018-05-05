@@ -9,11 +9,13 @@ public class Contacto {
     private String nombre;
     private String numero;
     private int img;
+    private boolean favorito;
 
     public Contacto(String nombre, String numero, int img) {
         this.nombre = nombre;
         this.numero = numero;
         this.img = img;
+        favorito = false;
     }
 
     public String getNombre() {
@@ -38,5 +40,13 @@ public class Contacto {
 
     public void setImg(int img) {
         this.img = img;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
     }
 }

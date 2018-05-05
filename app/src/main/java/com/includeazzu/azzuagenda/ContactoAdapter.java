@@ -1,13 +1,17 @@
 package com.includeazzu.azzuagenda;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /**
@@ -25,9 +29,26 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
     }
 
     @Override
-    public void onBindViewHolder(ContactoAdapter.ContactoViewHolder holder, int position) {
+    public void onBindViewHolder(final ContactoAdapter.ContactoViewHolder holder, final int position) {
         holder.nombre.setText(contactos.get(position).getNombre());
         holder.img.setImageResource(contactos.get(position).getImg());
+
+        holder.btnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean esFav = contactos.get(position).isFavorito();
+                if(esFav){
+                    contactos.get(position).setFavorito(false);
+                    holder.btnFav.setImageResource(R.drawable.nofav);
+                    Log.d("Entra","Es favorito: "+contactos.get(position).isFavorito());
+                }
+                else{
+                    contactos.get(position).setFavorito(true);
+                    holder.btnFav.setImageResource(R.drawable.fav);
+                    Log.d("Entra","Es favorito: "+contactos.get(position).isFavorito());
+                }
+            }
+        });
 
 
     }
@@ -40,11 +61,15 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         CardView card;
         TextView nombre;
         ImageView img;
+        ImageButton btnFav;
+        Context context;
         public ContactoViewHolder(View itemView) {
             super(itemView);
             card = itemView.findViewById(R.id.card_view);
             nombre = itemView.findViewById(R.id.nomContacto);
             img = itemView.findViewById(R.id.img);
+            btnFav = itemView.findViewById(R.id.btnfav);
+            context = itemView.getContext();
         }
     }
 
