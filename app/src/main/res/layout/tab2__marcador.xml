@@ -27,7 +27,8 @@
             android:ems="10"
             android:inputType="phone"
             android:textAlignment="center"
-            android:textSize="32sp" />
+            android:textSize="32sp"
+            android:digits="1234567890+*#"/>
 
         <ImageButton
             android:id="@+id/imageButton"
