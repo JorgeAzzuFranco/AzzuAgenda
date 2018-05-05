@@ -43,6 +43,7 @@ public class Tab2_Marcador extends Fragment {
     Contacto contactos;
     String strNombre;
     String strNumero;
+    Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class Tab2_Marcador extends Fragment {
         vMarcador = inflater.inflate(R.layout.tab2__marcador, container, false);
 
         nombre = vMarcador.findViewById(R.id.editNombre);
-        final EditText numero = (EditText) vMarcador.findViewById(R.id.editNum);
+        final EditText numero = vMarcador.findViewById(R.id.editNum);
         guardar = vMarcador.findViewById(R.id.btnGuardar);
         llamar = vMarcador.findViewById(R.id.btnllamar);
 
@@ -61,14 +62,15 @@ public class Tab2_Marcador extends Fragment {
         llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //pedirPermiso();
-                strNumero = numero.getText().toString();
+                pedirPermiso(numero);
+
+                /*strNumero = numero.getText().toString();
                 if(!TextUtils.isEmpty(strNumero)) {
                     String dial = "tel:" + strNumero;
                     startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
                 }else {
                     Toast.makeText(getContext(), "Enter a phone number", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
 
@@ -85,11 +87,9 @@ public class Tab2_Marcador extends Fragment {
 
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
 
-    public void pedirPermiso(){
+    public void pedirPermiso(EditText numero){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (ContextCompat.checkSelfPermission(getParentFragment().getContext(),
-                    Manifest.permission.CALL_PHONE)
-                    != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getParentFragment().getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) getParentFragment().getContext(),
                         Manifest.permission.CALL_PHONE)) {
 
@@ -97,35 +97,27 @@ public class Tab2_Marcador extends Fragment {
                     ActivityCompat.requestPermissions((Activity) getParentFragment().getContext(),
                             new String[]{Manifest.permission.CALL_PHONE},
                             MY_PERMISSIONS_REQUEST_CALL_PHONE);
+
+                    //Iniciara la llamada
+                    strNumero = numero.getText().toString();
+                    if(!TextUtils.isEmpty(strNumero)) {
+                        String dial = "tel:" + strNumero;
+                        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                    }else {
+                        Toast.makeText(getContext(), "Enter a phone number", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
-    }
-
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    callPhone();
-                } else {
-                    System.out.println("El usuario ha rechazado el permiso");
-                }
-                return;
+        else{
+            //Iniciara la llamada
+            strNumero = numero.getText().toString();
+            if(!TextUtils.isEmpty(strNumero)) {
+                String dial = "tel:" + strNumero;
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+            }else {
+                Toast.makeText(getContext(), "Enter a phone number", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    public void callPhone() {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setPackage("com.android.phone");
-        intent.setData(Uri.parse("tel:" + strNumero));
-        Context context = super.getContext();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            context.startActivity(intent);
-            return;
-        }
-    }*/
-
 }
