@@ -35,6 +35,7 @@ public class Tab1_Contactos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Vista a trabajar
         vContactos = inflater.inflate(R.layout.tab1__contactos, container, false);
+
         //Preparando objetos rv, llm  y contactos para el recyclerView
         rv = vContactos.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
@@ -51,9 +52,9 @@ public class Tab1_Contactos extends Fragment {
         return vContactos;
     }
 
+    //Metodo para obtener los contactos
     private void addContacts() {
         Log.d("Anade", "Anadiendo contactos");
-
         try {
             Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
             while (phones.moveToNext()) {
@@ -65,13 +66,9 @@ public class Tab1_Contactos extends Fragment {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        contactos.add(new Contacto("Aoi", "12312321",R.drawable.persona));
-        contactos.add(new Contacto("Arya", "12312321", R.drawable.persona));
-        contactos.add(new Contacto("Andrew", "12312321", R.drawable.persona));
-        contactos.add(new Contacto("Ali", "12312321", R.drawable.persona));
     }
 
+    //Pidiendo permiso al sistema para acceder a los contactos (ANDROID MARSHMALLOW Y SUPERIORES)
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
 
     @Override
