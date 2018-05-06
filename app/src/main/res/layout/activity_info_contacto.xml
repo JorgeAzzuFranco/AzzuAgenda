@@ -1,9 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.includeazzu.azzuagenda.infoContactoActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/info"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:src="@drawable/personagrande" />
+
+    <RelativeLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_margin="8dp">
+
+        <!-- Linear de Numero -->
+        <LinearLayout
+            android:id="@+id/noms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_nombre"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/editNombre"
+                android:layout_width="200dp"
+                android:enabled="false"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- Linear de Nombre -->
+        <LinearLayout
+            android:id="@+id/nums"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_below="@+id/noms"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/txtnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="@string/numero_de_telefono" />
+
+            <EditText
+                android:id="@+id/editNum"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/txtnum"
+                android:inputType="phone"
+                android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:maxLength="12"
+                android:enabled="false"
+                android:digits="1234567890+*#"/>
+
+        </LinearLayout>
+
+        <!-- Linear de botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nums"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:layout_marginTop="8dp">
+
+            <ImageButton
+                android:id="@+id/btnllamar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/llamadamini" />
+
+            <ImageButton
+                android:id="@+id/btnShare"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:textSize="20sp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/share"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

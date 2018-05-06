@@ -1,6 +1,8 @@
 package com.includeazzu.azzuagenda;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,6 +35,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         holder.nombre.setText(contactos.get(position).getNombre());
         holder.img.setImageResource(contactos.get(position).getImg());
 
+        //Listener del boton favorito
         holder.btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,8 +53,25 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
             }
         });
 
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent infoContacto = new Intent(holder.context.getApplicationContext(), infoContactoActivity.class);
+                String contactNombre = contactos.get(position).getNombre();
+                String contactNum = contactos.get(position).getNumero();
+                int contactImg = contactos.get(position).getImg();
+
+                infoContacto.putExtra("nom", contactNombre);
+                infoContacto.putExtra("num", contactNum);
+                infoContacto.putExtra("img", contactImg);
+
+                view.getContext().startActivity(infoContacto);
+            }
+        });
 
     }
+
+
     @Override
     public int getItemCount() {
         return contactos.size();

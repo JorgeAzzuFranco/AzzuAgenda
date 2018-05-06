@@ -22,6 +22,13 @@ public class Contacto implements Parcelable {
         favorito = false;
     }
 
+    public Contacto(String nombre, String numero, int img, boolean favorito) {
+        this.nombre = nombre;
+        this.numero = numero;
+        this.img = img;
+        this.favorito = favorito;
+    }
+
     public String getNombre() {
         return nombre;
     }
