@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".infoContactoActivity" />
+        <activity android:name=".infoContactoActivity">
+
+        </activity>
     </application>
 
 </manifest>

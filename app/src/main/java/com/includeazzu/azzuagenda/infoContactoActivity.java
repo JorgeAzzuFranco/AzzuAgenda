@@ -12,18 +12,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class infoContactoActivity extends AppCompatActivity {
+
+    //Declarando objetos de vista
+    ImageButton volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_contacto);
+
+        //Inicializando boton volver
+        volver = findViewById(R.id.back);
+
+        volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Va a volver", Toast.LENGTH_SHORT).show();
+                onBackPressed();
+            }
+        });
 
         //Obteniendo valores del bundle y asignando a variables
         Bundle infoEnv = getIntent().getExtras();
@@ -47,7 +63,9 @@ public class infoContactoActivity extends AppCompatActivity {
                 pedirPermiso(etNumero);
             }
         });
+
     }
+
 
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     String strNumero;
