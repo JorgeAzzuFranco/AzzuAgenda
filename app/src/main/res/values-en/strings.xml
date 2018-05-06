@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AzzuContacts</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_label1">Contacts</string>
+    <string name="tab_label2">Dialer</string>
+    <string name="tab_label3">Favourites</string>
+    <string name="Sample_name">Sample Name</string>
+    <string name="numero_de_telefono">Cellphone:</string>
+    <string name="txt_nombre">Name:</string>
+    <string name="txt_guardar">Save</string>
+</resources>

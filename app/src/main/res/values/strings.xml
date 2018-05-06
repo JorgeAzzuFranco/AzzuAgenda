@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">AzzuAgenda</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hola fragmento vacio</string>
     <string name="tab_label1">Contactos</string>
     <string name="tab_label2">Marcador</string>
     <string name="tab_label3">Favoritos</string>
