@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -47,8 +48,8 @@ public class infoContactoActivity extends AppCompatActivity {
         final String numero = infoEnv.get("num").toString();
         int img = Integer.parseInt(infoEnv.get("img").toString());
 
-        final EditText etNombre = findViewById(R.id.editNombre);
-        final EditText etNumero = findViewById(R.id.editNum);
+        final TextView etNombre = findViewById(R.id.editNombre);
+        final TextView etNumero = findViewById(R.id.editNum);
         ImageView image = findViewById(R.id.img);
         ImageButton llamar = findViewById(R.id.btnllamar);
         ImageButton compartir = findViewById(R.id.btnShare);
@@ -82,7 +83,7 @@ public class infoContactoActivity extends AppCompatActivity {
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     String strNumero;
 
-    public void pedirPermiso(EditText numero){
+    public void pedirPermiso(TextView numero){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this,

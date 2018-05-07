@@ -57,11 +57,14 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/editNombre"
                 android:layout_width="200dp"
-                android:enabled="false"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:hint="@string/Sample_name"/>
 
         </LinearLayout>
 
@@ -83,17 +86,15 @@
                 android:textSize="20sp"
                 android:text="@string/numero_de_telefono" />
 
-            <EditText
+            <TextView
                 android:id="@+id/editNum"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/txtnum"
                 android:inputType="phone"
                 android:textSize="20dp"
-                android:layout_marginLeft="4dp"
-                android:maxLength="20"
-                android:enabled="false"
-                android:digits="1234567890+*#"/>
+                android:layout_marginLeft="8dp"
+                android:hint="@string/Sample_Number"/>
 
         </LinearLayout>
 
