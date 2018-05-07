@@ -63,26 +63,6 @@ public class Tab2_Marcador extends Fragment {
             }
         });
 
-        /*guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nombre = (EditText) vMarcador.findViewById(R.id.editNombre);
-                numero2 = (EditText) vMarcador.findViewById(R.id.editNum);
-
-                strNombre = nombre.getText().toString();
-                strNumero = numero2.getText().toString();
-
-                contactos = new ArrayList<>();
-                contactos.add( new Contacto(strNombre, strNumero, R.drawable.persona));
-
-                bundle = new Bundle();
-                bundle.putParcelableArrayList("KEY"+i, contactos);
-
-                i++;
-            }
-        });*/
-
-
         return vMarcador;
     }
 

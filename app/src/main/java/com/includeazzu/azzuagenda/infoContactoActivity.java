@@ -47,7 +47,7 @@ public class infoContactoActivity extends AppCompatActivity {
         final String numero = infoEnv.get("num").toString();
         int img = Integer.parseInt(infoEnv.get("img").toString());
 
-        EditText etNombre = findViewById(R.id.editNombre);
+        final EditText etNombre = findViewById(R.id.editNombre);
         final EditText etNumero = findViewById(R.id.editNum);
         ImageView image = findViewById(R.id.img);
         ImageButton llamar = findViewById(R.id.btnllamar);
@@ -64,6 +64,18 @@ public class infoContactoActivity extends AppCompatActivity {
             }
         });
 
+        compartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                String shareNombre = etNombre.getText().toString();
+                String shareNumero = etNumero.getText().toString();
+                String mensaje = "Nombre: " + shareNombre + "\nNumero: " + shareNumero;
+                share.putExtra(Intent.EXTRA_TEXT, mensaje);
+                startActivity(Intent.createChooser(share, "Share via"));
+            }
+        });
     }
 
 
