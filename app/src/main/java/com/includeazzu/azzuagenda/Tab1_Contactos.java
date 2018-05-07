@@ -1,6 +1,6 @@
 package com.includeazzu.azzuagenda;
 
-import android.content.ContentProvider;
+
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -13,10 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.Toast;
-
-import java.security.Key;
 import java.util.ArrayList;
 
 public class Tab1_Contactos extends Fragment {
@@ -31,6 +28,7 @@ public class Tab1_Contactos extends Fragment {
     //Declarando objetos para mostrar los contactos
     ContactoAdapter cAdapter;
     ArrayList<Contacto> contactos;
+    ArrayList<Contacto> favoritos = new ArrayList<>();;
     Bundle bundle;
 
     @Override
@@ -47,24 +45,6 @@ public class Tab1_Contactos extends Fragment {
         //Añadiendo contactos
         contactos = new ArrayList<>();
         addContacts();
-
-        /*bundle = this.getArguments();
-        if (bundle == null){
-            addContacts();
-        }
-        else{
-            while(!bundle.isEmpty()) {
-                String name = bundle.getParcelableArrayList("KEY").get(0).toString();
-                String number = bundle.getParcelableArrayList("KEY").get(1).toString();
-                int image = Integer.parseInt(bundle.getParcelableArrayList("KEY").get(2).toString());
-                boolean fav = Boolean.parseBoolean(bundle.getParcelableArrayList("KEY").get(3).toString());
-                Toast.makeText(getContext(),
-                        "Datos: " + name + ", " + number + String.valueOf(fav),
-                        Toast.LENGTH_SHORT);
-                contactos.add(new Contacto(name, number, image, fav));
-            }
-            addContacts();
-        }*/
 
         cAdapter = new ContactoAdapter(contactos);
         rv.setAdapter(cAdapter);
@@ -109,5 +89,23 @@ public class Tab1_Contactos extends Fragment {
     public ContentResolver getContentResolver() {
         ContentResolver contactProvider = super.getContext().getContentResolver();
         return contactProvider;
+    }
+
+    public void addFavoritos(Contacto contacto){
+        favoritos.add(contacto);
+        Log.d("Anade a Fav", "Esta en fav: "+ contacto.getNombre()+ ", "+ contacto.getNumero());
+    }
+
+    public void borrarFavorito(String nombre) {
+        int counter=0;
+        Log.d("Entro en borrar", "Esta borrando el favorito con nombre de: " + nombre);
+        for (Contacto cont : favoritos){
+            if (cont.getNombre()== nombre)
+                break;
+
+            counter++;
+        }
+
+        favoritos.remove(counter);
     }
 }
