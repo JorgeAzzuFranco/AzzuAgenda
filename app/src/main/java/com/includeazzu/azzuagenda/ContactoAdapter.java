@@ -76,14 +76,14 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
                     //Si no es favorito, cambia el icono a fav y lo mete al arreglo
                     holder.btnFav.setImageResource(R.drawable.fav);
                     contextT1.addFavoritos(contactos.get(position));
-                    Log.d("Entra","Es favorito: "+contactos.get(position).isFavorito());
+                    //Log.d("Entra","Es favorito: "+contactos.get(position).isFavorito());
                 }
                 else{
                     //Si es favorito, cambia el icono a nofav y lo quita del arreglo
                     contactos.get(position).setFavorito(false);
                     holder.btnFav.setImageResource(R.drawable.nofav);
                     contextT1.borrarFavorito(contactos.get(position).getNombre());
-                    Log.d("Entra","Es favorito: "+contactos.get(position).isFavorito());
+                    //Log.d("Entra","Es favorito: "+contactos.get(position).isFavorito());
                 }
             }
         });

@@ -32,12 +32,8 @@ public class Tab1_Contactos extends Fragment {
 
     //Declarando objetos para mostrar los contactos
     ContactoAdapter cAdapter;
-    ArrayList<Contacto> contactos;
+    ArrayList<Contacto> contactos = new ArrayList<>();
     ArrayList<Contacto> favoritos = new ArrayList<>();
-
-    //Probando a ver si sale
-    Tab3_Favoritos tab3Sender = new Tab3_Favoritos();
-    Bundle bundleFav;
 
 
     @Override
@@ -52,12 +48,23 @@ public class Tab1_Contactos extends Fragment {
         rv.setLayoutManager(llm);
 
         //Añadiendo contactos
-        contactos = new ArrayList<>();
+        //contactos = new ArrayList<>();
         int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED){
             if (savedInstanceState != null){
                 contactos = savedInstanceState.getParcelableArrayList("cont");
-                favoritos = savedInstanceState.getParcelableArrayList("fav");
+
+                int i = 0;
+                for (Contacto cont : contactos){
+                    if (cont.isFavorito()){
+                     favoritos.add(cont);
+                     Log.d("anadiendo", favoritos.get(i).getNombre());
+                     i++;
+                    }
+                }
+
+                Log.d("ArregloFav", "Arreglo contactos tiene: "+contactos.size());
+                Log.d("ArregloFav", "Arreglo favorito tiene: "+favoritos.size());
                 cAdapter = new ContactoAdapter(contactos);
                 rv.setAdapter(cAdapter);
             }
@@ -70,23 +77,14 @@ public class Tab1_Contactos extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_CONTACTS},PERMISSIONS_REQUEST_READ_CONTACTS);
         }
 
-        if (!favoritos.isEmpty()){
-            bundleFav.putSerializable("ctc", favoritos);
-            tab3Sender.setArguments(bundleFav);
-            final FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.pager, tab3Sender, "tag");
-            ft.addToBackStack("tag");
-            ft.commit();
-        }
-
         return vContactos;
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putParcelableArrayList("cont", contactos);
         savedInstanceState.putParcelableArrayList("fav", favoritos);
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     //Metodo para obtener los contactos
@@ -134,20 +132,24 @@ public class Tab1_Contactos extends Fragment {
 
     public void addFavoritos(Contacto contacto){
         favoritos.add(contacto);
-        Log.d("Anade a Fav", "Esta en fav: "+ contacto.getNombre()+ ", "+ contacto.getNumero());
+        Log.d("Fav", "Favoritos tiene: "+favoritos.size());
     }
 
     public void borrarFavorito(String nombre) {
         int counter=0;
-        Log.d("Entro en borrar", "Esta borrando el favorito con nombre de: " + nombre);
         for (Contacto cont : favoritos){
+            Log.d("Contador For", counter+"");
             if (cont.getNombre()== nombre)
                 break;
 
             counter++;
         }
-
-        favoritos.remove(counter);
+        Log.d("Contador", counter+"");
+        try {
+            favoritos.remove(counter);
+        }catch (Exception e){
+            Log.d("ERROR", e.toString()+"");
+        }
+            Log.d("Fav", "Favoritos tiene: "+favoritos.size());
     }
-
 }
