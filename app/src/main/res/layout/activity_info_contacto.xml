@@ -25,104 +25,104 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/info"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
-        android:src="@drawable/personagrande" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/info"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"
+            android:src="@drawable/personagrande" />
 
-    <RelativeLayout
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:layout_margin="8dp">
-
-        <!-- Linear de Numero -->
-        <LinearLayout
-            android:id="@+id/noms"
+        <RelativeLayout
+            android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:foregroundGravity="center"
-            android:layout_marginTop="8dp">
+            android:layout_margin="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Linear de Numero -->
+            <LinearLayout
+                android:id="@+id/noms"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nombre"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:layout_marginTop="8dp">
 
-            <TextView
-                android:id="@+id/editNombre"
-                android:layout_width="200dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_nombre"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/editNombre"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/black"
+                    android:hint="@string/Sample_name"/>
+
+            </LinearLayout>
+
+            <!-- Linear de Nombre -->
+            <LinearLayout
+                android:id="@+id/nums"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginLeft="8dp"
-                android:textColor="@color/black"
-                android:hint="@string/Sample_name"/>
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:layout_below="@+id/noms"
+                android:layout_marginTop="8dp">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txtnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="@string/numero_de_telefono" />
 
-        <!-- Linear de Nombre -->
-        <LinearLayout
-            android:id="@+id/nums"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:foregroundGravity="center"
-            android:layout_below="@+id/noms"
-            android:layout_marginTop="8dp">
+                <TextView
+                    android:id="@+id/editNum"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/txtnum"
+                    android:inputType="phone"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:hint="@string/Sample_Number"/>
 
-            <TextView
-                android:id="@+id/txtnum"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <!-- Linear de botones -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/numero_de_telefono" />
+                android:layout_below="@+id/nums"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:layout_marginTop="8dp">
 
-            <TextView
-                android:id="@+id/editNum"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/txtnum"
-                android:inputType="phone"
-                android:textSize="20dp"
-                android:layout_marginLeft="8dp"
-                android:hint="@string/Sample_Number"/>
+                <ImageButton
+                    android:id="@+id/btnllamar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/llamadamini" />
 
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btnShare"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/share"/>
 
-        <!-- Linear de botones -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nums"
-            android:gravity="center"
-            android:foregroundGravity="center"
-            android:layout_marginTop="8dp">
+            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btnllamar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/llamadamini" />
-
-            <ImageButton
-                android:id="@+id/btnShare"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:textSize="20sp"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/share"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+        </RelativeLayout>
 
 </RelativeLayout>

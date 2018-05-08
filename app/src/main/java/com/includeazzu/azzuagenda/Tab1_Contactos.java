@@ -54,16 +54,17 @@ public class Tab1_Contactos extends Fragment {
 
     //Metodo para obtener los contactos
     private void addContacts() {
-        Log.d("Anade", "Anadiendo contactos");
-        //int i=0;
+        String help = "";
         try {
             Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
             while (phones.moveToNext()) {
                 String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                 String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                if(!(help.equals(name))){
                 contactos.add(new Contacto(name, phoneNumber, R.drawable.persona));
-                /*Log.d("Numero: ", contactos.get(i).getNumero()+"");
-                i++;*/
+                }
+                help = name;
             }
             phones.close();
         } catch (Exception e) {
