@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +35,10 @@ public class Tab1_Contactos extends Fragment {
     ArrayList<Contacto> contactos;
     ArrayList<Contacto> favoritos = new ArrayList<>();
 
+    //Probando a ver si sale
+    Tab3_Favoritos tab3Sender = new Tab3_Favoritos();
+    Bundle bundleFav;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,15 +55,38 @@ public class Tab1_Contactos extends Fragment {
         contactos = new ArrayList<>();
         int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-            addContacts();
-            cAdapter = new ContactoAdapter(contactos);
-            rv.setAdapter(cAdapter);
-
+            if (savedInstanceState != null){
+                contactos = savedInstanceState.getParcelableArrayList("cont");
+                favoritos = savedInstanceState.getParcelableArrayList("fav");
+                cAdapter = new ContactoAdapter(contactos);
+                rv.setAdapter(cAdapter);
+            }
+            else{
+                addContacts();
+                cAdapter = new ContactoAdapter(contactos);
+                rv.setAdapter(cAdapter);
+            }
         }else {
             ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_CONTACTS},PERMISSIONS_REQUEST_READ_CONTACTS);
         }
 
+        if (!favoritos.isEmpty()){
+            bundleFav.putSerializable("ctc", favoritos);
+            tab3Sender.setArguments(bundleFav);
+            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.pager, tab3Sender, "tag");
+            ft.addToBackStack("tag");
+            ft.commit();
+        }
+
         return vContactos;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelableArrayList("cont", contactos);
+        savedInstanceState.putParcelableArrayList("fav", favoritos);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     //Metodo para obtener los contactos
