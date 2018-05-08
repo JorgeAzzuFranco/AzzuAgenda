@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -35,49 +36,62 @@ public class Tab1_Contactos extends Fragment {
     ArrayList<Contacto> contactos = new ArrayList<>();
     ArrayList<Contacto> favoritos = new ArrayList<>();
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_CONTACTS},1);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Vista a trabajar
-        vContactos = inflater.inflate(R.layout.tab1__contactos, container, false);
-
-        //Preparando objetos rv, llm  y contactos para el recyclerView
-        rv = vContactos.findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
-        llm = new LinearLayoutManager(getContext());
-        rv.setLayoutManager(llm);
 
         //Añadiendo contactos
-        //contactos = new ArrayList<>();
-        int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS);
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-            if (savedInstanceState != null){
-                contactos = savedInstanceState.getParcelableArrayList("cont");
 
-                int i = 0;
-                for (Contacto cont : contactos){
-                    if (cont.isFavorito()){
-                     favoritos.add(cont);
-                     Log.d("anadiendo", favoritos.get(i).getNombre());
-                     i++;
-                    }
+        if (savedInstanceState != null){
+
+            //Vista a trabajar
+            vContactos = inflater.inflate(R.layout.tab1__contactos, container, false);
+
+            //Preparando objetos rv, llm  y contactos para el recyclerView
+            rv = vContactos.findViewById(R.id.rv);
+            rv.setHasFixedSize(true);
+            llm = new LinearLayoutManager(getContext());
+            rv.setLayoutManager(llm);
+
+            contactos = savedInstanceState.getParcelableArrayList("cont");
+
+            int i = 0;
+            for (Contacto cont : contactos){
+                if (cont.isFavorito()){
+                    favoritos.add(cont);
+                    Log.d("anadiendo", favoritos.get(i).getNombre());
+                    i++;
                 }
+            }
 
-                Log.d("ArregloFav", "Arreglo contactos tiene: "+contactos.size());
-                Log.d("ArregloFav", "Arreglo favorito tiene: "+favoritos.size());
-                cAdapter = new ContactoAdapter(contactos);
-                rv.setAdapter(cAdapter);
-            }
-            else{
-                addContacts();
-                cAdapter = new ContactoAdapter(contactos);
-                rv.setAdapter(cAdapter);
-            }
-        }else {
-            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_CONTACTS},PERMISSIONS_REQUEST_READ_CONTACTS);
+            Log.d("ArregloFav", "Arreglo contactos tiene: "+contactos.size());
+            Log.d("ArregloFav", "Arreglo favorito tiene: "+favoritos.size());
+            cAdapter = new ContactoAdapter(contactos);
+            rv.setAdapter(cAdapter);
+            return vContactos;
         }
+        else{
 
-        return vContactos;
+            //Vista a trabajar
+            vContactos = inflater.inflate(R.layout.tab1__contactos, container, false);
+
+            //Preparando objetos rv, llm  y contactos para el recyclerView
+            rv = vContactos.findViewById(R.id.rv);
+            rv.setHasFixedSize(true);
+            llm = new LinearLayoutManager(getContext());
+            rv.setLayoutManager(llm);
+
+            addContacts();
+            cAdapter = new ContactoAdapter(contactos);
+            rv.setAdapter(cAdapter);
+            return vContactos;
+        }
     }
 
     @Override
@@ -108,19 +122,19 @@ public class Tab1_Contactos extends Fragment {
     }
 
     //Pidiendo permiso al sistema para acceder a los contactos (ANDROID MARSHMALLOW Y SUPERIORES)
-    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        // Make sure it's our original READ_CONTACTS request
-        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults){
+        if (requestCode == 1) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 addContacts();
-                Toast.makeText(getContext(), "Read Contacts permission granted", Toast.LENGTH_SHORT).show();
+                cAdapter = new ContactoAdapter(contactos);
+                rv.setAdapter(cAdapter);
+                Toast.makeText(getContext(), "Reinicie la aplicacion", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getContext(), "Read Contacts permission denied", Toast.LENGTH_SHORT).show();
             }
-        } else {
+        }
+        else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

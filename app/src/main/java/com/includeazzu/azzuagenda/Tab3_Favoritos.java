@@ -44,7 +44,7 @@ public class Tab3_Favoritos extends Fragment {
             Toast.makeText(getContext(), "Recibo favoritos", Toast.LENGTH_SHORT);
         }
         else{
-            favoritos.add(new Contacto("asd","123", R.drawable.persona));
+            favoritos.add(new Contacto("No hay Favoritos","0", R.drawable.persona));
             cAdapter = new ContactoAdapter(favoritos);
             rv.setAdapter(cAdapter);
             Log.d("No Fav", "No se obtuvieron favoritos");
