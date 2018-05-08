@@ -1,12 +1,16 @@
 package com.includeazzu.azzuagenda;
 
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,8 +32,8 @@ public class Tab1_Contactos extends Fragment {
     //Declarando objetos para mostrar los contactos
     ContactoAdapter cAdapter;
     ArrayList<Contacto> contactos;
-    ArrayList<Contacto> favoritos = new ArrayList<>();;
-    Bundle bundle;
+    ArrayList<Contacto> favoritos = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,10 +48,15 @@ public class Tab1_Contactos extends Fragment {
 
         //Añadiendo contactos
         contactos = new ArrayList<>();
-        addContacts();
+        int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS);
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED){
+            addContacts();
+            cAdapter = new ContactoAdapter(contactos);
+            rv.setAdapter(cAdapter);
 
-        cAdapter = new ContactoAdapter(contactos);
-        rv.setAdapter(cAdapter);
+        }else {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_CONTACTS},PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
 
         return vContactos;
     }
@@ -76,14 +85,17 @@ public class Tab1_Contactos extends Fragment {
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        // Make sure it's our original READ_CONTACTS request
         if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission is granted
                 addContacts();
+                Toast.makeText(getContext(), "Read Contacts permission granted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getContext(), "No se pueden mostrar contactos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Read Contacts permission denied", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
@@ -109,4 +121,5 @@ public class Tab1_Contactos extends Fragment {
 
         favoritos.remove(counter);
     }
+
 }
